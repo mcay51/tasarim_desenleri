@@ -20,30 +20,27 @@ Prototype Design Pattern, var olan bir nesnenin kopyasını oluşturarak yeni ne
 
 ```mermaid
 classDiagram
-    class Prototype {
+    class Clonable {
         <<interface>>
-        +clone() Prototype
+        +clone() Clonable
     }
     
-    class ConcretePrototype1 {
-        -field1
-        -field2
-        +clone() Prototype
+    class ElektronikUrun {
+        -urunKodu: int
+        -urunAdi: String
+        -satisFiyati: double
+        +clone() Clonable
     }
     
-    class ConcretePrototype2 {
-        -fieldA
-        -fieldB
-        +clone() Prototype
+    class EnvanterYoneticisi {
+        +main(String[] args) void
+        +urunEkle(ElektronikUrun urun) void
+        +urunleriListele() void
     }
     
-    class Client {
-        +operation()
-    }
-    
-    Prototype <|.. ConcretePrototype1
-    Prototype <|.. ConcretePrototype2
-    Client --> Prototype
+    Clonable <|.. ElektronikUrun
+    EnvanterYoneticisi --> ElektronikUrun : oluşturur ve klonlar
+
 ```
 
 ## Avantajlar
