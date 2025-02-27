@@ -1,6 +1,6 @@
 public class Logger {
-    // Sınıfın tek örneğini tutacak statik değişken
-    private static Logger instance;
+    // Volatile anahtar kelimesi, değişkenin farklı thread'ler tarafından doğru şekilde görülmesini sağlar
+    private static volatile Logger instance;
     
     // Log dosyasının adı
     private String logFileName;
@@ -11,11 +11,17 @@ public class Logger {
         System.out.println("Logger başlatıldı. Log dosyası: " + logFileName);
     }
     
-    // Singleton örneğini döndüren metod
+    // Thread-safe singleton örneğini döndüren metod (Double-Checked Locking)
     public static Logger getInstance() {
-        // Eğer instance henüz oluşturulmadıysa oluştur (lazy initialization)
+        // İlk kontrol - senkronizasyon maliyetini azaltmak için
         if (instance == null) {
-            instance = new Logger();
+            // Senkronize blok - yalnızca bir thread bu bloğa girebilir
+            synchronized (Logger.class) {
+                // İkinci kontrol - başka bir thread zaten instance'ı oluşturmuş olabilir
+                if (instance == null) {
+                    instance = new Logger();
+                }
+            }
         }
         return instance;
     }
@@ -26,8 +32,8 @@ public class Logger {
         // Gerçek uygulamada burada dosyaya yazma işlemi yapılabilir
     }
     
-    // Log dosyasının adını değiştiren metod
-    public void setLogFileName(String fileName) {
+    // Log dosyasının adını değiştiren metod - thread güvenliği için senkronize edildi
+    public synchronized void setLogFileName(String fileName) {
         this.logFileName = fileName;
         System.out.println("Log dosyası değiştirildi: " + fileName);
     }
