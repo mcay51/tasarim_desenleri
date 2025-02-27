@@ -1,3 +1,6 @@
+// Paket bilgisi ekliyorum
+package tr.com.mcay.creational.singleton;
+
 public class Logger {
     // Volatile anahtar kelimesi, değişkenin farklı thread'ler tarafından doğru şekilde görülmesini sağlar
     private static volatile Logger instance;
