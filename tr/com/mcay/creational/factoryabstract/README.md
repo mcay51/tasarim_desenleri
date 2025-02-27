@@ -129,3 +129,49 @@ Her bildirim ailesi, her kanal için farklı davranışlara sahip olabilir.
 Bu örnekte, Factory Method deseninden farklı olarak, artık her bildirim kanalı için ayrı bir fabrika değil, her bildirim ailesi için bir fabrika oluşturduk. Her fabrika, tüm bildirim kanallarını (email, SMS, push) oluşturabilir, ancak bunları kendi ailesinin özelliklerine göre (acil veya standart) oluşturur.
 
 Bu yaklaşım, yeni bir bildirim kanalı eklemek istediğimizde (örneğin, web bildirimleri) tüm fabrikaları güncellememiz gerektiği anlamına gelir, ancak yeni bir bildirim ailesi eklemek (örneğin, pazarlama bildirimleri) sadece yeni bir fabrika sınıfı oluşturmayı gerektirir.
+## Abstract Factory Tasarım Deseni Uygulaması
+
+Bu uygulama, Abstract Factory (Soyut Fabrika) tasarım desenini bildirim sistemi üzerinden göstermektedir. İki farklı bildirim türü (Email ve SMS) ve iki farklı bildirim önceliği (Acil ve Standart) bulunmaktadır.
+
+### Proje Yapısı
+
+1. **Soyut Ürün Arayüzleri**:
+   - `IEmailNotification`: Email bildirimleri için arayüz
+   - `ISmsNotification`: SMS bildirimleri için arayüz
+
+2. **Somut Ürünler**:
+   - `AcilEmailNotification`: Acil email bildirimleri
+   - `AcilSmsNotification`: Acil SMS bildirimleri
+   - `StandardEmailNotification`: Standart email bildirimleri
+   - `StandardSmsNotification`: Standart SMS bildirimleri
+
+3. **Soyut Fabrika Arayüzü**:
+   - `INotificationFactory`: Bildirim fabrikası arayüzü
+
+4. **Somut Fabrikalar**:
+   - `AcilNotificationFactory`: Acil bildirimler için fabrika
+   - `StandardNotificationFactory`: Standart bildirimler için fabrika
+
+5. **İstemci Sınıfı**:
+   - `NotificationClient`: Bildirimleri gönderen istemci sınıfı
+
+6. **Ana Sınıf**:
+   - `Main`: Uygulamayı çalıştıran ana sınıf
+
+### Tasarım Deseninin Çalışma Mantığı
+
+1. İstemci (`NotificationClient`), soyut fabrika arayüzünü (`INotificationFactory`) kullanır.
+2. Çalışma zamanında, istemciye hangi fabrika türünün (Acil veya Standart) kullanılacağı enjekte edilir.
+3. İstemci, fabrika arayüzü üzerinden ürünleri (Email ve SMS bildirimleri) oluşturur.
+4. İstemci, somut ürünlerin hangi türde olduğunu bilmeden onları kullanabilir.
+
+### Örnek Çalıştırma
+
+`Main` sınıfı çalıştırıldığında:
+
+1. Önce acil bildirim fabrikası oluşturulur ve istemciye verilir.
+2. İstemci, acil bildirimleri gönderir.
+3. Sonra standart bildirim fabrikası oluşturulur ve istemciye verilir.
+4. İstemci, standart bildirimleri gönderir.
+
+Bu şekilde, istemci kodu değiştirilmeden farklı türde bildirimler gönderilebilir. Bu, Abstract Factory tasarım deseninin temel avantajıdır.
