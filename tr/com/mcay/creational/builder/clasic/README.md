@@ -82,3 +82,17 @@ classDiagram
 3. **Bağımlılık**: Client, builder ve director sınıflarını bilmek zorundadır.
 
 Builder deseni, bir çocuğun LEGO parçalarını adım adım birleştirerek farklı modeller oluşturmasına benzer. Temel parçalar (yapım adımları) aynı olsa da, sonuçta ortaya çıkan modeller (ürünler) birbirinden farklı olabilir. Bu sayede karmaşık nesneleri basit adımlarla oluşturabilir ve client kodunu bu karmaşıklıktan koruyabilirsiniz.
+
+## Örnek Uygulama
+
+Bu örnekte, farklı türde araçlar (araba ve motorsiklet) oluşturmak için Builder desenini kullanıyoruz:
+
+## Çıktı Örneği
+
+```
+Araba oluşturuluyor...
+Motorlu araba oluşturuluyor...
+Motorsiklet oluşturuluyor...
+Motorsiklet oluşturuluyor...
+```
+
