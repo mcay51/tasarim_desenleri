@@ -74,3 +74,42 @@ classDiagram
 3. Çok karmaşık nesne yaratma senaryoları için yetersiz kalabilir
 
 Bu yaklaşım, özellikle sabit sayıda ve iyi tanımlanmış ürün tipleri olduğunda kullanışlıdır. Enum kullanımı, tip güvenliği sağlar ve yanlış tip gönderme riskini azaltır.
+
+# Factory Method Tasarım Deseni: Bildirim Sistemi Örneği
+
+## Bileşenler
+
+### NotificationType
+- Bildirim türlerini tanımlayan bir enum.
+
+### INotificationService
+- Tüm bildirim servislerinin uygulaması gereken arayüz.
+
+### Servis Uygulamaları
+- **EmailNotificationService**: E-posta bildirimleri için INotificationService arayüzünü uygulayan sınıf.
+- **SmsNotificationService**: SMS bildirimleri için INotificationService arayüzünü uygulayan sınıf.
+- **PushNotificationService**: Push bildirimleri için INotificationService arayüzünü uygulayan sınıf.
+
+### NotificationFactory
+- Bildirim tipine göre uygun bildirim servisini oluşturan fabrika sınıfı.
+
+### NotificationClient
+- Factory Method desenini test etmek için örnek bir istemci sınıfı.
+
+## Factory Method Tasarım Deseni Hakkında
+
+Factory Method tasarım deseni, nesne oluşturma mantığını istemci kodundan ayırarak, kodun daha esnek ve genişletilebilir olmasını sağlar. Bu örnekte, istemci kod (NotificationClient) hangi bildirim servisinin nasıl oluşturulduğunu bilmek zorunda kalmadan, sadece NotificationFactory üzerinden istediği türde bir bildirim servisi alabilir.
+
+## Genişletilebilirlik
+
+Yeni bir bildirim türü eklemek istediğimizde:
+
+1. NotificationType enum'ına yeni bir tür ekleriz.
+2. INotificationService arayüzünü uygulayan yeni bir sınıf oluştururuz.
+3. NotificationFactory sınıfındaki create metoduna yeni bir case ekleriz.
+
+Bu şekilde, mevcut kodu değiştirmeden (Open/Closed Principle) sistemi genişletebiliriz.
+
+## Kullanım
+
+Uygulamayı çalıştırmak için NotificationClient sınıfındaki main metodunu kullanabilirsiniz.
