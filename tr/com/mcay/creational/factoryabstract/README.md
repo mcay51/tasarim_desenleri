@@ -36,11 +36,6 @@ class ISmsNotification {
 +sendSms()
 }
 
-class IPushNotification {
-<<interface>>
-+sendPush()
-}
-
 %% Somut Ürünler - Acil Bildirimler
 class AcilEmailNotification {
 +sendEmail()
@@ -48,10 +43,6 @@ class AcilEmailNotification {
 
 class AcilSmsNotification {
 +sendSms()
-}
-
-class AcilPushNotification {
-+sendPush()
 }
 
 %% Somut Ürünler - Standart Bildirimler
@@ -63,29 +54,22 @@ class StandardSmsNotification {
 +sendSms()
 }
 
-class StandardPushNotification {
-+sendPush()
-}
-
 %% Soyut Fabrika Arayüzü
 class INotificationFactory {
 <<interface>>
 +createEmailNotification() IEmailNotification
 +createSmsNotification() ISmsNotification
-+createPushNotification() IPushNotification
 }
 
 %% Somut Fabrikalar
 class AcilNotificationFactory {
 +createEmailNotification() IEmailNotification
 +createSmsNotification() ISmsNotification
-+createPushNotification() IPushNotification
 }
 
 class StandardNotificationFactory {
 +createEmailNotification() IEmailNotification
 +createSmsNotification() ISmsNotification
-+createPushNotification() IPushNotification
 }
 
 %% İstemci Sınıfı
@@ -99,24 +83,19 @@ IEmailNotification <|.. AcilEmailNotification
 IEmailNotification <|.. StandardEmailNotification
 ISmsNotification <|.. AcilSmsNotification
 ISmsNotification <|.. StandardSmsNotification
-IPushNotification <|.. AcilPushNotification
-IPushNotification <|.. StandardPushNotification
 INotificationFactory <|.. AcilNotificationFactory
 INotificationFactory <|.. StandardNotificationFactory
 
 %% İlişkiler - Bağımlılıklar
 AcilNotificationFactory ..> AcilEmailNotification : creates
 AcilNotificationFactory ..> AcilSmsNotification : creates
-AcilNotificationFactory ..> AcilPushNotification : creates
 StandardNotificationFactory ..> StandardEmailNotification : creates
 StandardNotificationFactory ..> StandardSmsNotification : creates
-StandardNotificationFactory ..> StandardPushNotification : creates
 
 %% İstemci İlişkileri
 NotificationClient --> INotificationFactory : uses
 NotificationClient ..> IEmailNotification : uses
 NotificationClient ..> ISmsNotification : uses
-NotificationClient ..> IPushNotification : uses
 
 ````
 
