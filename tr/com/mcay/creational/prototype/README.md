@@ -59,3 +59,22 @@ classDiagram
 - Çok fazla iç içe geçmiş nesneleri kopyalamak performans sorunlarına yol açabilir
 
 Bu tasarım kalıbı, özellikle nesne oluşturmanın maliyetli olduğu durumlarda çok faydalıdır. Tıpkı bir fotokopi makinesi gibi, elinizdeki bir belgenin kopyasını çıkarmak, aynı belgeyi yeniden yazmaktan çok daha kolay ve hızlıdır.
+
+## Örnek Uygulama
+
+Bu projede, Prototype tasarım desenini elektronik ürün envanteri yönetimi üzerinden gösteriyoruz:
+
+### Çalışma Mantığı
+
+1. Önce orijinal ürünler oluşturulur (laptop ve telefon)
+2. Bu ürünlerin klonları `clone()` metodu ile elde edilir
+3. Klonlanan ürünlerin fiyatları değiştirilerek farklılaştırılır
+4. Hem orijinal hem de klonlanmış ürünler envantere eklenir
+5. Tüm ürünler listelenir
+
+### Çıktı Örneği
+Envanterdeki Ürünler:
+Ürün Kodu: 1, Ürün Adı: Laptop, Satış Fiyatı: 15000.0 TL
+Ürün Kodu: 2, Ürün Adı: Telefon, Satış Fiyatı: 5000.0 TL
+Ürün Kodu: 1, Ürün Adı: Laptop, Satış Fiyatı: 16000.0 TL
+Ürün Kodu: 2, Ürün Adı: Telefon, Satış Fiyatı: 4500.0 TL
