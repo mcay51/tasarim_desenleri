@@ -19,7 +19,9 @@ Inner Class Builder deseni şu durumlarda tercih edilir:
 5. Build metodunda gerekli validasyonları yapın
 
 ## UML Diyagramı
+
 ```mermaid
+
 classDiagram
     class Kisi {
         -final String ad
@@ -50,9 +52,10 @@ classDiagram
         +telefon(String telefon) Builder
         +build() Kisi
     }
-    
-    Kisi +-- Builder
+    Kisi "1" -- "1" Builder: has-a    Builder "1" -- "1" Kisi: creates
 ```
+
+
 
 ## Avantajlar ve Dezavantajlar
 
