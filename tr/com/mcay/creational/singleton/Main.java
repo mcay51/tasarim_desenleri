@@ -1,3 +1,5 @@
+package tr.com.mcay.creational.singleton;
+
 public class Main {
     public static void main(String[] args) {
         // Farklı sınıfları simüle eden metotları çağıralım
