@@ -50,7 +50,7 @@ classDiagram
     }
     
     class NotificationFactory {
-        -NotificationFactory() 
+        -NotificationFactory()
         +static create(type: NotificationType) INotificationService
     }
     
@@ -60,11 +60,7 @@ classDiagram
     
     NotificationFactory ..> INotificationService : creates
     NotificationFactory ..> NotificationType : uses
-    
-    note for NotificationFactory "private NotificationFactory() {\n  // Private constructor\n}\n\npublic static INotificationService create(NotificationType type) {\n  switch(type) {\n    case EMAIL:\n      return new EmailNotificationService();\n    case SMS:\n      return new SmsNotificationService();\n    case PUSH:\n      return new PushNotificationService();\n    default:\n      throw new IllegalArgumentException();\n  }\n}"
 ```
-
-
 
 ## Avantajlar
 1. Merkezi nesne yaratma - tek bir noktadan kontrol
