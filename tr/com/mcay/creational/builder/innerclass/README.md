@@ -21,7 +21,6 @@ Inner Class Builder deseni şu durumlarda tercih edilir:
 ## UML Diyagramı
 
 ```mermaid
-
 classDiagram
     class Kisi {
         -final String ad
@@ -52,7 +51,9 @@ classDiagram
         +telefon(String telefon) Builder
         +build() Kisi
     }
-    Kisi "1" -- "1" Builder: has-a    Builder "1" -- "1" Kisi: creates
+    
+    Kisi *-- Builder : has-a
+    Builder --> Kisi : creates
 ```
 
 
