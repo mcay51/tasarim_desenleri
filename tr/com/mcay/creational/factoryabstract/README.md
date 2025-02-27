@@ -23,105 +23,101 @@ Factory Method deseninden farklı olarak, Abstract Factory birden fazla ürün a
 5. **İstemci Kodu Yazma**: Soyut fabrika ve ürün arayüzlerini kullanarak istemci kodunu yazma.
 
 ## UML Diyagramı
+````mermaid
+classDiagram
+%% Soyut Ürün Arayüzleri
+class IEmailNotification {
+<<interface>>
++sendEmail()
+}
 
-````artifact
-id: notification-abstract-factory-uml
-name: Bildirim Sistemi Abstract Factory UML Diyagramı
-type: mermaid
-content: |-
-  classDiagram
-    %% Soyut Ürün Arayüzleri
-    class IEmailNotification {
-        <<interface>>
-        +sendEmail()
-    }
-    
-    class ISmsNotification {
-        <<interface>>
-        +sendSms()
-    }
-    
-    class IPushNotification {
-        <<interface>>
-        +sendPush()
-    }
-    
-    %% Somut Ürünler - Acil Bildirimler
-    class AcilEmailNotification {
-        +sendEmail()
-    }
-    
-    class AcilSmsNotification {
-        +sendSms()
-    }
-    
-    class AcilPushNotification {
-        +sendPush()
-    }
-    
-    %% Somut Ürünler - Standart Bildirimler
-    class StandardEmailNotification {
-        +sendEmail()
-    }
-    
-    class StandardSmsNotification {
-        +sendSms()
-    }
-    
-    class StandardPushNotification {
-        +sendPush()
-    }
-    
-    %% Soyut Fabrika Arayüzü
-    class INotificationFactory {
-        <<interface>>
-        +createEmailNotification() IEmailNotification
-        +createSmsNotification() ISmsNotification
-        +createPushNotification() IPushNotification
-    }
-    
-    %% Somut Fabrikalar
-    class AcilNotificationFactory {
-        +createEmailNotification() IEmailNotification
-        +createSmsNotification() ISmsNotification
-        +createPushNotification() IPushNotification
-    }
-    
-    class StandardNotificationFactory {
-        +createEmailNotification() IEmailNotification
-        +createSmsNotification() ISmsNotification
-        +createPushNotification() IPushNotification
-    }
-    
-    %% İstemci Sınıfı
-    class NotificationClient {
-        -factory: INotificationFactory
-        +sendNotifications()
-    }
-    
-    %% İlişkiler - Kalıtım
-    IEmailNotification <|.. AcilEmailNotification
-    IEmailNotification <|.. StandardEmailNotification
-    ISmsNotification <|.. AcilSmsNotification
-    ISmsNotification <|.. StandardSmsNotification
-    IPushNotification <|.. AcilPushNotification
-    IPushNotification <|.. StandardPushNotification
-    INotificationFactory <|.. AcilNotificationFactory
-    INotificationFactory <|.. StandardNotificationFactory
-    
-    %% İlişkiler - Bağımlılıklar
-    AcilNotificationFactory ..> AcilEmailNotification : creates
-    AcilNotificationFactory ..> AcilSmsNotification : creates
-    AcilNotificationFactory ..> AcilPushNotification : creates
-    StandardNotificationFactory ..> StandardEmailNotification : creates
-    StandardNotificationFactory ..> StandardSmsNotification : creates
-    StandardNotificationFactory ..> StandardPushNotification : creates
-    
-    %% İstemci İlişkileri
-    NotificationClient --> INotificationFactory : uses
-    NotificationClient ..> IEmailNotification : uses
-    NotificationClient ..> ISmsNotification : uses
-    NotificationClient ..> IPushNotification : uses
+class ISmsNotification {
+<<interface>>
++sendSms()
+}
+
+class IPushNotification {
+<<interface>>
++sendPush()
+}
+
+%% Somut Ürünler - Acil Bildirimler
+class AcilEmailNotification {
++sendEmail()
+}
+
+class AcilSmsNotification {
++sendSms()
+}
+
+class AcilPushNotification {
++sendPush()
+}
+
+%% Somut Ürünler - Standart Bildirimler
+class StandardEmailNotification {
++sendEmail()
+}
+
+class StandardSmsNotification {
++sendSms()
+}
+
+class StandardPushNotification {
++sendPush()
+}
+
+%% Soyut Fabrika Arayüzü
+class INotificationFactory {
+<<interface>>
++createEmailNotification() IEmailNotification
++createSmsNotification() ISmsNotification
++createPushNotification() IPushNotification
+}
+
+%% Somut Fabrikalar
+class AcilNotificationFactory {
++createEmailNotification() IEmailNotification
++createSmsNotification() ISmsNotification
++createPushNotification() IPushNotification
+}
+
+class StandardNotificationFactory {
++createEmailNotification() IEmailNotification
++createSmsNotification() ISmsNotification
++createPushNotification() IPushNotification
+}
+
+%% İstemci Sınıfı
+class NotificationClient {
+-factory: INotificationFactory
++sendNotifications()
+}
+
+%% İlişkiler - Kalıtım
+IEmailNotification <|.. AcilEmailNotification
+IEmailNotification <|.. StandardEmailNotification
+ISmsNotification <|.. AcilSmsNotification
+ISmsNotification <|.. StandardSmsNotification
+IPushNotification <|.. AcilPushNotification
+IPushNotification <|.. StandardPushNotification
+INotificationFactory <|.. AcilNotificationFactory
+INotificationFactory <|.. StandardNotificationFactory
+
+%% İlişkiler - Bağımlılıklar
+AcilNotificationFactory ..> AcilEmailNotification : creates
+AcilNotificationFactory ..> AcilSmsNotification : creates
+AcilNotificationFactory ..> AcilPushNotification : creates
+StandardNotificationFactory ..> StandardEmailNotification : creates
+StandardNotificationFactory ..> StandardSmsNotification : creates
+StandardNotificationFactory ..> StandardPushNotification : creates
+
+%% İstemci İlişkileri
+NotificationClient --> INotificationFactory : uses
+NotificationClient ..> IEmailNotification : uses
+NotificationClient ..> ISmsNotification : uses
+NotificationClient ..> IPushNotification : uses
+
 ````
 
 ## Avantajlar ve Dezavantajlar
