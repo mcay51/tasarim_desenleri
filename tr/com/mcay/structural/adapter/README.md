@@ -70,27 +70,3 @@ classDiagram
 - Tüm sınıfları adapte etmek her zaman mümkün olmayabilir
 
 Örnek senaryo: Yukarıdaki UML diyagramında gösterilen hata yönetimi sistemi, farklı türdeki hataları (veritabanı, servis ve faks hataları) ortak bir arayüz üzerinden yönetebilmektedir. FaxAdapter sınıfı, farklı yapıdaki Fax sınıfını IError arayüzüne uyumlu hale getirerek sistemle entegre olmasını sağlar.
-
-```csharp
-// Basit implementasyon örneği
-public interface IError {
-    int GetErrorNumber();
-    string GetDescription();
-}
-
-public class FaxAdapter : IError {
-    private readonly Fax _fax;
-    
-    public FaxAdapter(Fax fax) {
-        _fax = fax;
-    }
-    
-    public int GetErrorNumber() {
-        return _fax.GetFaxErrorCode();
-    }
-    
-    public string GetDescription() {
-        return _fax.GetErrorDescription();
-    }
-}
-```
