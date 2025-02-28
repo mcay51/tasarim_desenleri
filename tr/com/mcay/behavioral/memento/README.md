@@ -31,11 +31,7 @@ Memento tasarım deseni, Behavioral (Davranışsal) tasarım desenleri grubunda 
 
 #### **UML Diyagramı**
 
-````artifact
-id: memento-design-pattern
-name: Memento Tasarım Deseni UML Diyagramı
-type: mermaid
-content: |-
+```mermaid
   classDiagram
       class Originator {
           -state: string
@@ -56,8 +52,7 @@ content: |-
 
       Originator --> Memento : creates
       Caretaker --> Memento : stores
-````
-
+```
 ---
 
 #### **Avantajlar**
