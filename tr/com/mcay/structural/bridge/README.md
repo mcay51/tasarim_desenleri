@@ -55,7 +55,7 @@ classDiagram
 
 Bu yapıda Abstraction sınıfı, client tarafından kullanılan ana sınıftır ve Bridge interface'i üzerinden farklı implementasyonlara erişim sağlar. Bu sayede implementasyonlar clienttan tamamen soyutlanmış olur ve bağımsız olarak değiştirilebilir.
 ## Örnek Uygulama
-** Tv Kumanda Örneği
+### Tv Kumanda Örneği
 ```mermaid
 classDiagram
     class RemoteControl {
