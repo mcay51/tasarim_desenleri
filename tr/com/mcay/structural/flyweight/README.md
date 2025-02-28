@@ -1,70 +1,16 @@
-# Flyweight Design Pattern
+# Flyweight Tasarım Deseni
 
-## Genel Bakış
-Flyweight tasarım deseni, bellek kullanımını optimize etmek için aynı türden çok sayıda nesnenin tekrar tekrar oluşturulmasını önler. Bu desen, nesneleri bir havuzda saklar ve ortak özelliklere sahip nesneleri paylaşarak bellek tüketimini azaltır.
+## Amaç
+Flyweight (Hafif Nesne) tasarım deseni, çok sayıda benzer nesnenin verimli bir şekilde kullanılmasını sağlayan yapısal bir tasarım desenidir. Bu desen, nesnelerin ortak durumlarını paylaşarak bellek kullanımını azaltır.
 
-## Kullanım Alanları
-- Çok sayıda benzer nesnenin oluşturulması gerektiğinde
+## Kullanım Senaryoları
+- Çok sayıda benzer nesne oluşturulması gerektiğinde
 - Bellek kullanımının kritik olduğu durumlarda
-- Nesnelerin bazı özelliklerinin ortak (intrinsic), bazılarının ise değişken (extrinsic) olduğu durumlarda
-- Grafik uygulamaları (örneğin, oyunlarda aynı türden birçok obje), metin işleme (aynı harflerin tekrar kullanılması)
-
-## Uygulama Adımları
-1. **Flyweight Arayüzü**: Ortak davranışları tanımlar.
-2. **ConcreteFlyweight**: Paylaşılan (intrinsic) özellikleri tanımlayan sınıf.
-3. **FlyweightFactory**: Nesneleri havuzda saklar ve tekrar kullanılabilir nesneleri sağlar.
-4. **Client**: FlyweightFactory üzerinden nesneleri alır ve gerekirse extrinsic özellikleri ayarlar.
+- Nesnelerin durumlarının büyük bir kısmının paylaşılabilir olduğu durumlarda
+- Nesne kimliğinin önemli olmadığı durumlarda
 
 ## UML Diyagramı
-
-```mermaid
-classDiagram
-    class Flyweight {
-        <<interface>>
-        +operation(extrinsicState: string): void
-    }
-
-    class ConcreteFlyweight {
-        -intrinsicState: string
-        +operation(extrinsicState: string): void
-    }
-
-    class FlyweightFactory {
-        -flyweights: Map<string, Flyweight>
-        +getFlyweight(key: string): Flyweight
-    }
-
-    class Client {
-        +main(): void
-    }
-
-    Flyweight <|.. ConcreteFlyweight
-    FlyweightFactory o--> Flyweight
-    Client --> FlyweightFactory
 ```
-
-## Avantajlar
-- **Bellek tasarrufu**: Aynı özelliklere sahip nesneler paylaşılır, gereksiz nesne üretimi önlenir.
-- **Performans artışı**: Daha az bellek kullanımı ve nesne yönetimi sayesinde performans iyileşir.
-- **Ortak özelliklerin yönetimi**: Intrinsic özellikler merkezi bir yerde tutulur ve yönetilir.
-
-## Dezavantajlar
-- **Karmaşık yapı**: Havuz yönetimi ve intrinsic/extrinsic ayrımı ek bir karmaşıklık getirir.
-- **Ekstra bellek kullanımı**: Havuzun kendisi bir miktar bellek tüketir.
-- **Esneklik kaybı**: Paylaşılan nesneler tüm istemciler için aynı özelliklere sahip olmalıdır; bu, özelleştirme gereksinimlerini sınırlayabilir.
-
-Flyweight deseni, özellikle çok sayıda nesnenin aynı anda yönetildiği durumlarda bellek ve performans optimizasyonu sağlamak için etkili bir çözümdür.
-## Örnek Uygulama
-Flyweight tasarım desenini en iyi anlatan örneklerden biri **"Karakterlerin (Harflerin) Metin İşleme Uygulamalarında Tekrar Kullanılması"**dır.
-
-### Örnek: **Metin İşleme (Text Editor)**
-Bir metin düzenleyici düşünelim. Bu düzenleyicide aynı karakterler (örneğin "A", "B", "C") birden fazla yerde kullanılabilir. Flyweight deseni sayesinde, her karakter için yeni bir nesne oluşturmak yerine, aynı karakter nesnesi tekrar tekrar kullanılır. Karakterlerin **font, renk, boyut gibi ortak özellikleri (intrinsic)** Flyweight nesnesinde tutulurken, karakterin **konumu (extrinsic)** gibi değişken özellikleri istemci tarafından belirlenir.
-
----
-
-### UML Diyagramı
-
-```mermaid
 classDiagram
     class Character {
         <<interface>>
@@ -93,15 +39,63 @@ classDiagram
     Client --> CharacterFactory
 ```
 
----
+## Bileşenler
 
-### Açıklama
-1. **Character (Flyweight Arayüzü)**: Karakterlerin ortak davranışlarını tanımlar. Örneğin, bir karakterin ekranda belirli bir pozisyonda görüntülenmesi için `display()` metodu.
-2. **ConcreteCharacter (Flyweight)**: Paylaşılan (intrinsic) özellikleri içerir. Örneğin, `symbol`, `font`, `size`, ve `color` gibi özellikler.
-3. **CharacterFactory (FlyweightFactory)**: Karakter nesnelerini havuzda tutar ve tekrar kullanılabilir nesneleri sağlar. Örneğin, "A" karakteri bir kez oluşturulur ve tüm istemciler için paylaşılır.
-4. **Client**: FlyweightFactory üzerinden karakter nesnelerini alır ve konum gibi extrinsic özellikleri belirler.
+### Character (Flyweight Interface)
+- Flyweight nesnelerinin uygulaması gereken metodu tanımlar
+- Bu örnekte, karakterlerin belirli bir konumda gösterilmesini sağlayan `display` metodu
 
----
+### ConcreteCharacter (Concrete Flyweight)
+- Character arayüzünü uygular
+- İçsel durum (intrinsic state) bilgilerini içerir: sembol, yazı tipi, boyut, renk
+- Bu bilgiler tüm kullanım bağlamlarında paylaşılır
 
-### Özet
-Bu örnek, Flyweight deseninin nasıl çalıştığını somut bir şekilde gösterir. Metin düzenleyicilerde aynı karakterlerin tekrar tekrar kullanılması gerektiğinde Flyweight deseni, bellek tasarrufu ve performans artışı sağlar. Örneğin, bir metin belgesinde 1000 defa "A" harfi varsa, Flyweight sayesinde yalnızca bir "A" nesnesi oluşturulur ve 1000 farklı konum için kullanılır.
+### CharacterFactory (Flyweight Factory)
+- Flyweight nesnelerini oluşturur ve yönetir
+- Daha önce oluşturulan nesneleri önbelleğe alır ve gerektiğinde yeniden kullanır
+- Gereksiz nesne oluşturulmasını önler
+
+### Client
+- Flyweight desenini kullanan istemci kodu
+- Dışsal durum (extrinsic state) bilgilerini (konum) flyweight nesnelerine iletir
+
+## Çalışma Prensibi
+1. İstemci, CharacterFactory'den bir karakter nesnesi ister
+2. Factory, istenen karakter daha önce oluşturulmuşsa onu döndürür, oluşturulmamışsa yeni bir nesne oluşturur
+3. İstemci, karakterin konumunu (dışsal durum) belirterek display metodunu çağırır
+4. Aynı karakter farklı konumlarda gösterilse bile, tek bir nesne kullanılır
+
+## Avantajları
+- Bellek kullanımını azaltır
+- Performansı artırır
+- Nesne sayısını azaltır
+
+## Dezavantajları
+- Kod karmaşıklığını artırabilir
+- Dışsal durumun yönetilmesi gerekir
+- Bazı durumlarda performans düşebilir
+
+## Örnek Çıktı
+```
+Displaying text: "Hello Flyweight Pattern!"
+------------------------------
+Creating new character: 'H'
+Character 'H' displayed at position (0, 20) with font 'Arial', size 12, and color 'Black'
+Creating new character: 'e'
+Character 'e' displayed at position (10, 20) with font 'Arial', size 12, and color 'Black'
+Creating new character: 'l'
+Character 'l' displayed at position (20, 20) with font 'Arial', size 12, and color 'Black'
+Reusing existing character: 'l'
+Character 'l' displayed at position (30, 20) with font 'Arial', size 12, and color 'Black'
+Creating new character: 'o'
+Character 'o' displayed at position (40, 20) with font 'Arial', size 12, and color 'Black'
+Creating new character: ' '
+Character ' ' displayed at position (50, 20) with font 'Arial', size 12, and color 'Black'
+Creating new character: 'F'
+Character 'F' displayed at position (60, 20) with font 'Arial', size 12, and color 'Black'
+...
+------------------------------
+Total unique characters created: 14
+Total characters in text: 24
+Memory saved: 10 character objects
+```
