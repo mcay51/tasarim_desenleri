@@ -10,7 +10,7 @@ Flyweight (Hafif Nesne) tasarım deseni, çok sayıda benzer nesnenin verimli bi
 - Nesne kimliğinin önemli olmadığı durumlarda
 
 ## UML Diyagramı
-```
+```mermaid
 classDiagram
     class Character {
         <<interface>>
