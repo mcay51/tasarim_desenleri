@@ -60,12 +60,12 @@ Template Design Pattern, bir algoritmanın iskeletini (şablonunu) tanımlayan v
       AlisverisSepeti <|-- TelevizyonSepeti
       AlisverisSepeti <|-- BuzdolabiSepeti
 
-      AlisverisSepeti : +alisverisYap() {
+      AlisverisSepeti : +alisverisYap() 
       AlisverisSepeti :   baslangic()
       AlisverisSepeti :   urunSec()
       AlisverisSepeti :   odemeYap()
       AlisverisSepeti :   bitis()
-      AlisverisSepeti : }
+      AlisverisSepeti : 
 ```
 
 ---
