@@ -107,3 +107,47 @@ Aşağıda Visitor Design Pattern için bir UML diyagramı bulunmaktadır:
 
 #### **Örnek: Dosya Sistemi**
 Bir dosya sistemi düşünelim. Farklı türde dosyalar (örneğin, metin dosyası, görüntü dosyası) üzerinde çeşitli işlemler yapılabilir. Her dosya türü için farklı işlemler (örneğin, sıkıştırma, önizleme) uygulanabilir. Bu senaryoda, Visitor Design Pattern kullanılarak işlemler (ziyaretçiler) ve dosya türleri (elemanlar) birbirinden ayrılabilir.
+````mermaid
+classDiagram
+    class FileVisitor {
+        <<interface>>
+        +visitTextFile(file: TextFile): void
+        +visitImageFile(file: ImageFile): void
+    }
+
+    class CompressionVisitor {
+        <<Concrete Visitor>>
+        +visitTextFile(file: TextFile): void
+        +visitImageFile(file: ImageFile): void
+    }
+
+    class PreviewVisitor {
+        <<Concrete Visitor>>
+        +visitTextFile(file: TextFile): void
+        +visitImageFile(file: ImageFile): void
+    }
+
+    class File {
+        <<interface>>
+        +accept(visitor: FileVisitor): void
+    }
+
+    class TextFile {
+        <<Concrete Element>>
+        +accept(visitor: FileVisitor): void
+        +getContent(): String
+    }
+
+    class ImageFile {
+        <<Concrete Element>>
+        +accept(visitor: FileVisitor): void
+        +getResolution(): String
+    }
+
+    FileVisitor <|.. CompressionVisitor
+    FileVisitor <|.. PreviewVisitor
+    File <|.. TextFile
+    File <|.. ImageFile
+    TextFile --> FileVisitor : accept(visitor)
+    ImageFile --> FileVisitor : accept(visitor)
+````
