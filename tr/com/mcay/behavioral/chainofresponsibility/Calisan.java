@@ -1,4 +1,4 @@
-package tr.com.mcay.behavioral.chainofresponsibilty;
+package tr.com.mcay.behavioral.chainofresponsibility;
 
 /**
  * Calisan sınıfı, sorumluluk zinciri tasarım deseninin temel sınıfıdır.

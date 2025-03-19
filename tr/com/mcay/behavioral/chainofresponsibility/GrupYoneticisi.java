@@ -1,4 +1,4 @@
-package tr.com.mcay.behavioral.chainofresponsibilty;
+package tr.com.mcay.behavioral.chainofresponsibility;
 
 /**
  * GrupYoneticisi sınıfı, sorumluluk zincirindeki üçüncü seviye onaylayıcıdır.

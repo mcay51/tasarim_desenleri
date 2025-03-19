@@ -1,4 +1,6 @@
-package tr.com.mcay.behavioral.chainofresponsibilty;
+package tr.com.mcay.behavioral.chainofresponsibility;
+
+import tr.com.mcay.behavioral.chainofresponsibility.Direktor;
 
 /**
  * Chain of Responsibility tasarım desenini gösteren demo sınıfı.

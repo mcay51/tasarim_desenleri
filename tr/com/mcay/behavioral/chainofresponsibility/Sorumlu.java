@@ -1,4 +1,4 @@
-package tr.com.mcay.behavioral.chainofresponsibilty;
+package tr.com.mcay.behavioral.chainofresponsibility;
 
 /**
  * Sorumlu sınıfı, sorumluluk zincirindeki ilk seviye onaylayıcıdır.

@@ -1,4 +1,4 @@
-package tr.com.mcay.behavioral.chainofresponsibilty;
+package tr.com.mcay.behavioral.chainofresponsibility;
 
 /**
  * Yonetici sınıfı, sorumluluk zincirindeki ikinci seviye onaylayıcıdır.

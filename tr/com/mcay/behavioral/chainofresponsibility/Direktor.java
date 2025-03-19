@@ -1,4 +1,4 @@
-package tr.com.mcay.behavioral.chainofresponsibilty;
+package tr.com.mcay.behavioral.chainofresponsibility;
 
 /**
  * Direktor sınıfı, sorumluluk zincirindeki en üst seviye onaylayıcıdır.
