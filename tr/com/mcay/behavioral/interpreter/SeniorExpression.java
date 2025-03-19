@@ -16,7 +16,8 @@ public class SeniorExpression extends RoleExpression {
                 count++;
             }
         }
-        
+        System.out.println( "S : "+ count);
+        System.out.println( "S toplam : "+ (count*6));
         // Her "S" için 6 puan ekle
         context.setToplamPuan(context.getToplamPuan() + (count * 6));
     }

@@ -16,7 +16,8 @@ public class DeveloperExpression extends RoleExpression {
                 count++;
             }
         }
-        
+        System.out.println( "D : "+ count);
+        System.out.println( "D toplam : "+ (count*4));
         // Her "D" için 4 puan ekle
         context.setToplamPuan(context.getToplamPuan() + (count * 4));
     }

@@ -16,7 +16,8 @@ public class ArchitectureExpression extends RoleExpression {
                 count++;
             }
         }
-        
+        System.out.println( "A : "+ count);
+        System.out.println( "A toplam : "+ (count*10));
         // Her "A" için 10 puan ekle
         context.setToplamPuan(context.getToplamPuan() + (count * 10));
     }

@@ -16,7 +16,8 @@ public class ConsultantExpression extends RoleExpression {
                 count++;
             }
         }
-        
+        System.out.println( "C : "+ count);
+        System.out.println( "C toplam : "+ (count*8));
         // Her "C" için 8 puan ekle
         context.setToplamPuan(context.getToplamPuan() + (count * 8));
     }

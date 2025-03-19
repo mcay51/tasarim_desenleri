@@ -1,7 +1,9 @@
 package tr.com.mcay.behavioral.interpreter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Program sınıfı, yorumlayıcı deseninin istemci sınıfıdır.
@@ -13,31 +15,37 @@ public class Program {
      * @param formula İfade ağacını oluşturmak için kullanılacak formül
      * @return İfade ağacını temsil eden RoleExpression listesi
      */
-    public List<RoleExpression> createExpressionTree(String formula) {
-        List<RoleExpression> expressionTree = new ArrayList<>();
-        
-        // Formülde kullanılan her karakter için ilgili ifade sınıfını oluştur
+    public Set<RoleExpression> createExpressionTree(String formula) {
+        // Önce tüm ifade nesnelerini bir kez oluştur
+        ArchitectureExpression architectureExpression = new ArchitectureExpression();
+        ConsultantExpression consultantExpression = new ConsultantExpression();
+        SeniorExpression seniorExpression = new SeniorExpression();
+        DeveloperExpression developerExpression = new DeveloperExpression();
+
+        Set<RoleExpression> expressionTree = new HashSet<>();
+
+// Formülde kullanılan her karakter için ilgili ifade nesnesini ekle
         for (int i = 0; i < formula.length(); i++) {
             char c = formula.charAt(i);
             switch (c) {
                 case 'A':
-                    expressionTree.add(new ArchitectureExpression());
+                    expressionTree.add(architectureExpression);
                     break;
                 case 'C':
-                    expressionTree.add(new ConsultantExpression());
+                    expressionTree.add(consultantExpression);
                     break;
                 case 'S':
-                    expressionTree.add(new SeniorExpression());
+                    expressionTree.add(seniorExpression);
                     break;
                 case 'D':
-                    expressionTree.add(new DeveloperExpression());
+                    expressionTree.add(developerExpression);
                     break;
                 default:
                     // Tanınmayan karakterler için hiçbir şey yapma
                     break;
             }
         }
-        
+
         return expressionTree;
     }
     
@@ -46,7 +54,7 @@ public class Program {
      * @param context Yorumlanacak bağlam nesnesi
      */
     public void runExpression(Context context) {
-        List<RoleExpression> expressionTree = createExpressionTree(context.getFormul());
+        Set<RoleExpression> expressionTree = createExpressionTree(context.getFormul());
         
         // Her ifadeyi yorumla
         for (RoleExpression expression : expressionTree) {
@@ -59,17 +67,17 @@ public class Program {
      * @param args Komut satırı argümanları
      */
     public static void main(String[] args) {
-        // Örnek bir formül: "ACSDD" (1 Mimar, 1 Danışman, 1 Kıdemli, 2 Geliştirici)
+       // Örnek bir formül: "ACSDD" (1 Mimar, 1 Danışman, 1 Kıdemli, 2 Geliştirici)
         String formula = "ACSDD";
         Context context = new Context(formula);
         
         Program program = new Program();
-        program.runExpression(context);
+         program.runExpression(context);
         
         System.out.println("Formül: " + formula);
         System.out.println("Toplam Puan: " + context.getToplamPuan());
         
-        // Başka bir örnek: "AACSSDDD"
+       // Başka bir örnek: "AACSSDDD"
         formula = "AACSSDDD";
         context = new Context(formula);
         
